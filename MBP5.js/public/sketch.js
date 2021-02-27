@@ -1,18 +1,23 @@
 let bg;
 let bubble1 = [ ], bubble2 = [ ];
-let i = 0,j = 0;
-let flag = true;
+let i = 0,j = 0, ind = 0;
+let flag = true, flag2 = false;
+let ar = [ ];
 
 function setup() {
   bg = loadImage('assets/bgwh.png');
-  createCanvas(500, 500);
+  createCanvas(1280, 720);
   for(let i = 0; i<20; i++)
   {
-    bubble1.push(new Bubble());
+    bubble1.push(new Bubble1());
   }
   for(let i = 0; i<20; i++)
   {
-    bubble2.push(new Bubble());
+    bubble2.push(new Bubble2());
+  }
+  for(let i = 0; i<20; i++)
+  {
+    ar.push(false);
   }
 }
 
@@ -28,9 +33,30 @@ function draw() {
     text(t,(width/2),(height/2 + 200));
     fill(0, 100, 100);
   }
+  else if(ar[ind] && ind == 0)
+  {
+    flag2 = true;
+    stroke(255);
+    fill(0, 100, 100);
+    let t = 'Question '+ind+': \nPress M if the next statement is a myth according to you, Press F if it feels like a Fact\n';
+    textAlign(CENTER);
+    text(t,(width/2),(height/2));
+    fill(color('brown'));
+    text(' Spraying alcohol instead of sanitiser will be effective in killing coronavirus',(width/2),(height/2)+100);
+  }
+  else if(ar[ind] && ind == 1)
+  {
+    flag2 = true;
+    stroke(255);
+    fill(0, 100, 100);
+    let t = 'Question '+ind+': \nPress M if the next statement is a myth according to you, Press F if it feels like a Fact\n';
+    textAlign(CENTER);
+    text(t,(width/2),(height/2));
+    fill(color('brown'));
+    text(' The world has been aware of climate change since the IPCC (Intergovernmental Panel on Climate Change) formed in 1988.',(width/2),(height/2)+100);
+  }
   else
   {
-    
     bubble1[i].move();
     bubble1[i].show();
     bubble2[j].move();
@@ -40,52 +66,27 @@ function draw() {
     i = i + 1;
     j = j + 1;
   }
+
+ 
 }
 
 function mouseClicked()
 {
   flag = false;
-}
-
-function mousePressed()
-{
-  bubble1[i].clicked;
-  bubble2[i].clicked;
-}
-
-class Bubble{
-  constructor(){
-    this.x = width/2;
-    this.y = height/2;
-    this.r = 1;
-    this.angle = random(-1,1);
-    let color = [0 , 255];
-    this.v = random(-10,10);
-    this.diameter = 25;
-  }
-  
-  move(){
-    this.x = (width/2) + (this.r*(sqrt(1-(this.angle*this.angle))));
-    this.y = (height/2) + (this.r*this.angle);
-    this.r = this.r+this.v;
-
-  }
-  
-  clicked()
+  if(flag2)
   {
-    let d = dist(mouseX,mouseY,this.x,this.y);
-    if(d < this.diameter/2)
-    {
-      console.log("Clicked on Bubble");
-    }
+    ind = ind + 1;
+    flag2 = false;
   }
 
-  show(){
-    stroke(random(color));
-    strokeWeight(4);
-    fill(152);
-    ellipse(this.x,this.y,this.diameter,this.diameter);
+  if(bubble1[i].clicked())
+  {
+    ar[ind] = true;
   }
-
-
+  
+  if(bubble2[j].clicked())
+  {
+    ar[ind] = true;
+  }
 }
+
