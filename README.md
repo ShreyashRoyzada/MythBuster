@@ -1,2 +1,2 @@
 # MythBuster
-Truth and almighty prevails
+Truth and agility prevails
