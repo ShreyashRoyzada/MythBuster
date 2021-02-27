@@ -6,7 +6,7 @@ let ar = [ ];
 
 function setup() {
   bg = loadImage('assets/bgwh.png');
-  createCanvas(1280, 720);
+  createCanvas(1080, 720);
   for(let i = 0; i<20; i++)
   {
     bubble1.push(new Bubble1());
