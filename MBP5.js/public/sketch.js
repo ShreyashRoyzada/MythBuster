@@ -1,14 +1,15 @@
-let bg;
+let bg,bgim;
 let bubble1 = [ ], bubble2 = [ ];
-let i = 0,j = 0, ind = 0,n = 0;
+let i = 0,j = 0, ind = 0,n = 0,bgx = 0;
 let flag = true, flag2 = false,mflag = false,correct = false,gamefinished = false,check = false;
 let ar = [ ];
 let im = [ ];
 let score = 0;
 
 function setup() {
-  bg = loadImage('assets/bgwh.png');
-  createCanvas(1366, 650);  //Can be improved to be responsive
+  bg = loadImage('assets/bg.png');
+  bgim = loadImage('assets/bgloop.png');
+  createCanvas(1200, 700);  //Can be improved to be responsive
   for(let i = 0; i<50; i++)
   {
     bubble1.push(new Bubble1());
@@ -29,7 +30,7 @@ function setup() {
 }
 
 function draw() {
-  background(255);
+  back();
   if(flag)
   {
     image(bg,((width/2)-(bg.width/2)),((height/2)-(bg.height/2)));
@@ -58,7 +59,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -91,7 +92,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -124,7 +125,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -157,7 +158,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -190,7 +191,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -223,7 +224,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -256,7 +257,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -289,7 +290,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -322,7 +323,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -355,7 +356,7 @@ function draw() {
 
     if(mflag)
     {
-      background(255);
+      back();
       im[n+2].resize(910,650);
       image(im[n+2],(width/2) - (im[n+2].width/2),(height/2) - (im[n+2].height/2));
       if(correct)
@@ -399,6 +400,17 @@ function draw() {
  
 }
 
+function back()
+{
+  
+  image(bgim,bgx,0);
+  image(bgim,bgx + bgim.width, 0);
+  bgx = bgx - 1;
+  if(bgx == (-bgim.width))
+  {
+    bgx=0;
+  }
+}
 function keyPressed(){
   if(keyCode === LEFT_ARROW && !(check)) //Myth
   {
