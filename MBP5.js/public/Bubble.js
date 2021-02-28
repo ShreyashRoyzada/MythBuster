@@ -5,7 +5,7 @@ class Bubble1{
       this.r = 1;
       this.angle = random(-1,1);
       this.color = color('red');
-      this.v = random(-10,10);
+      this.v = random([-5,-4,-3,3,4,5]);
       this.diameter = 50;
     
     }

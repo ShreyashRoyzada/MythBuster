@@ -8,7 +8,7 @@ let score = 0;
 
 function setup() {
   bg = loadImage('assets/bgwh.png');
-  createCanvas(1200, 650);
+  createCanvas(1366, 650);  //Can be improved to be responsive
   for(let i = 0; i<50; i++)
   {
     bubble1.push(new Bubble1());
@@ -17,7 +17,7 @@ function setup() {
   {
     bubble2.push(new Bubble2());
   }
-  for(let i = 0; i<20; i++)
+  for(let i = 0; i<10; i++)
   {
     ar.push(false);
   }
@@ -44,7 +44,7 @@ function draw() {
   {
 
     flag2 = true;
-    im[n].resize(630,450);
+    im[n].resize(910,650);
     image(im[n],200,0);
     // image(im[n+1],width/2,(height/2)+100);
 
@@ -397,7 +397,7 @@ function draw() {
 }
 
 function keyPressed(){
-  if(keyCode === LEFT_ARROW) //Myth
+  if(keyCode === LEFT_ARROW && !(check)) //Myth
   {
     mflag = true;
     check = true;
@@ -409,7 +409,7 @@ function keyPressed(){
     }
   }
 
-  if(keyCode === RIGHT_ARROW) //Fact
+  if(keyCode === RIGHT_ARROW && !(check)) //Fact
   {
     mflag = true;
     check = true;
