@@ -383,16 +383,19 @@ function draw() {
   }
   else
   {
+
     bubble1[i].move();
     bubble1[i].show();
     bubble2[j].move();
     bubble2[j].show();
   }
-  if(frameCount%200 == 0){
+
+  if(!bubble1[i].IsInScreen()){
     i = i + 1;
+  }
+  if(!bubble2[j].IsInScreen()){
     j = j + 1;
   }
-
  
 }
 

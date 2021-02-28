@@ -9,7 +9,14 @@ class Bubble1{
       this.diameter = 50;
     
     }
-    
+    IsInScreen()
+    {
+        if((this.x<width && this.x>=0) &&(this.y<height && this.y>=0))
+        {
+            return true;
+        }
+        return false;
+    }
     move(){
       this.x = (width/2) + (this.r*(sqrt(1-(this.angle*this.angle))));
       this.y = (height/2) + (this.r*this.angle);
@@ -46,12 +53,20 @@ class Bubble2{
       this.v = random(-10,10);
       this.diameter = 50;
     }
+
+    IsInScreen()
+    {
+        if((this.x<width && this.x>=0) &&(this.y<height && this.y>=0))
+        {
+            return true;
+        }
+        return false;
+    }
     
     move(){
       this.x = (width/2) + (this.r*(sqrt(1-(this.angle*this.angle))));
       this.y = (height/2) + (this.r*this.angle);
       this.r = this.r+this.v;
-  
     }
     
     clicked()
