@@ -1,15 +1,22 @@
 let bg,bgim;
 let bubble1 = [ ], bubble2 = [ ];
-let i = 0,j = 0, ind = 0,n = 0,bgx = 0;
+let i = 0,j = 0, ind = 0,n = 0,bgx = 0, pno = 1,a = 1;
 let flag = true, flag2 = false,mflag = false,correct = false,gamefinished = false,check = false;
 let ar = [ ];
 let im = [ ];
-let score = 0;
+let score = 0,scoreB = 0;
+var socket;
 
 function setup() {
   bg = loadImage('assets/bg.png');
   bgim = loadImage('assets/bgloop.png');
-  createCanvas(1200, 700);  //Can be improved to be responsive
+  createCanvas(1024, 650);  //Can be improved to be responsive
+  socket = io.connect();
+  socket.on('scoreout',conn);
+  socket.on('NoOfClients',ping);
+  
+  // socket.on('disconnect', function() { pno--; });
+  
   for(let i = 0; i<50; i++)
   {
     bubble1.push(new Bubble1());
@@ -400,8 +407,20 @@ function draw() {
  
 }
 
+function ping(nc){
+  pno = nc;
+}
+
+var num = 1, v = 0;
+
+function conn(data){
+  num = data[0];
+  v = data[1];
+}
+
 function back()
 {
+  console.log(pno);
   
   image(bgim,bgx,0);
   image(bgim,bgx + bgim.width, 0);
@@ -410,7 +429,27 @@ function back()
   {
     bgx=0;
   }
+  var scoreo = score;
+  var data = [pno, score] ;
+  if(pno == 1){
+    v = score;
+  }
+  socket.emit('score',data);
+  while(a<=pno)
+  {
+  if(a == num){
+    score = v;
+  }
+
+  let ys = "Player "+a+" - " + score;
+  text(ys,width - 100, 20 * a);
+  a++;
+  }
+  a = 1;
+  score = scoreo;
+  // text(os,width - 100, 40);
 }
+
 function keyPressed(){
   if(keyCode === LEFT_ARROW && !(check)) //Myth
   {
@@ -436,8 +475,10 @@ function keyPressed(){
     }
   }
 }
+
 function mouseClicked()
 {
+  console.log(mouseX,mouseY);
   flag = false;
 
   if(gamefinished)
